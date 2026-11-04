@@ -1,55 +1,28 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Memória das emoções — exemplo de jogo</title>
-<style>
-*{box-sizing:border-box}body{margin:0;background:#f9f5ec;font-family:system-ui,'Segoe UI',sans-serif;color:#254b43}main{max-width:600px;margin:auto;padding:19px}header{text-align:center}h1{font:normal 26px Georgia,serif;margin:0 0 8px}p{font-size:12px;line-height:1.55;color:#718177;margin:0 0 10px}.stats{display:flex;justify-content:space-between;align-items:center;margin:13px 0;font-size:12px;font-weight:700}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.card{height:92px;border:1px solid #d8e1d4;background:#dfebe1;border-radius:12px;color:#46695c;font-size:33px;cursor:pointer;transition:transform .12s,background .15s}.card:hover:not(:disabled){transform:translateY(-2px)}.card:focus-visible{outline:3px solid #b7886c;outline-offset:2px}.card.revelada{background:#fff;color:#244b43;border-color:#c6d5cb}.card.acertou{background:#cbe0d1;border-color:#91b09c}.card:disabled{cursor:default}button.restart{border:0;border-radius:40px;background:#244b43;color:white;padding:10px 17px;font-size:12px;font-weight:700}.message{text-align:center;padding:14px 0;font-size:12px;min-height:42px}small{color:#8a998e;font-size:10px;display:block;text-align:center}@media(max-width:440px){main{padding:12px}.card{height:72px;font-size:26px}.grid{gap:6px}h1{font-size:22px}}
-</style>
-</head><body><main>
-<header><h1>Memória das emoções ✳</h1><p>Encontre dois cartões com a mesma emoção. Observe as palavras e seus símbolos.</p></header>
-<div class="stats"><span id="contador" role="status">Pares: 0 / 6</span><button class="restart" id="reiniciar" type="button">Recomeçar ↻</button></div>
-<div class="grid" id="tabuleiro" aria-label="Jogo de memória com 12 cartas"></div>
-<div class="message" id="mensagem" role="status" aria-live="polite">Vire duas cartas para encontrar um par.</div>
-<small>Jogo lúdico demonstrativo. Não é um teste ou avaliação psicológica.</small>
-</main><script>
-(function(){
-'use strict';
-const emocoes=[{palavra:'Alegria',icone:'☀️'},{palavra:'Calma',icone:'🌿'},{palavra:'Surpresa',icone:'✨'},{palavra:'Carinho',icone:'💛'},{palavra:'Curiosidade',icone:'🔎'},{palavra:'Coragem',icone:'🌟'}];
-const tab=document.getElementById('tabuleiro'),contador=document.getElementById('contador'),mensagem=document.getElementById('mensagem');
-let selecionadas=[],acertos=0,ocupado=false,identificador=0,temporizador;
-function criar(){
-  identificador++; clearTimeout(temporizador); selecionadas=[]; acertos=0; ocupado=false;
-  contador.textContent='Pares: 0 / 6'; mensagem.textContent='Vire duas cartas para encontrar um par.';
-  tab.replaceChildren();
-  const baralho=[...emocoes,...emocoes].map((e,i)=>({...e,uid:i}));
-  for(let i=baralho.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[baralho[i],baralho[j]]=[baralho[j],baralho[i]];}
-  baralho.forEach(e=>{const botao=document.createElement('button');botao.type='button';botao.className='card';botao.textContent='✳';botao.setAttribute('aria-label','Carta virada para baixo');botao.dataset.nome=e.palavra;
-    botao.addEventListener('click',()=>virar(botao,e,identificador));tab.append(botao);
-  });
-}
-function virar(botao,e,rodada){
-  if(ocupado||botao.disabled||selecionadas.some(x=>x.botao===botao))return;
-  botao.textContent=e.icone;botao.classList.add('revelada');botao.setAttribute('aria-label',e.palavra);selecionadas.push({botao,e});
-  if(selecionadas.length!==2)return;
-  const [a,b]=selecionadas;
-  if(a.e.palavra===b.e.palavra){
-    a.botao.disabled=b.botao.disabled=true;a.botao.classList.add('acertou');b.botao.classList.add('acertou');
-    selecionadas=[];acertos++;contador.textContent=`Pares: ${acertos} / 6`;
-    mensagem.textContent=acertos===6?'Você encontrou todos os pares! ✳':'Par encontrado! Escolha mais duas cartas.';
-  }else{
-    ocupado=true;mensagem.textContent='Essas cartas são diferentes. Tente outra combinação.';
-    temporizador=setTimeout(()=>{if(rodada!==identificador)return;
-      [a,b].forEach(x=>{x.botao.textContent='✳';x.botao.classList.remove('revelada');x.botao.setAttribute('aria-label','Carta virada para baixo');});
-      selecionadas=[];ocupado=false;
-    },900);
-  }
-}
-document.addEventListener('keydown',event=>{
-  if(event.key==='Escape' && window.parent!==window){
-    window.parent.postMessage({tipo:'fechar-jogo-gabriela'},'*');
-  }
-});
-document.getElementById('reiniciar').addEventListener('click',criar);criar();
-}());
-</script></body></html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Memória das emoções — recurso interativo</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+    <script src="game.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Memória das emoções ✳</h1>
+        <p>Encontre dois cartões com a mesma emoção. Observe as palavras e seus símbolos.</p>
+      </header>
+      <div class="stats">
+        <span id="contador" role="status">Pares: 0 / 6</span
+        ><button class="restart" id="reiniciar" type="button">Recomeçar ↻</button>
+      </div>
+      <div class="grid" id="tabuleiro" aria-label="Jogo de memória com 12 cartas"></div>
+      <div class="message" id="mensagem" role="status" aria-live="polite">
+        Vire duas cartas para encontrar um par.
+      </div>
+      <small>Jogo lúdico demonstrativo. Não é um teste ou avaliação psicológica.</small>
+    </main>
+  </body>
+</html>

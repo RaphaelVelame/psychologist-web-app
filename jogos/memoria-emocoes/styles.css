@@ -1,0 +1,126 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: #f9f5ec;
+  font-family: system-ui, 'Segoe UI', sans-serif;
+  color: #254b43;
+}
+main {
+  max-width: 600px;
+  margin: auto;
+  padding: 19px;
+}
+header {
+  text-align: center;
+}
+h1 {
+  font:
+    normal 26px Georgia,
+    serif;
+  margin: 0 0 8px;
+}
+p {
+  font-size: 12px;
+  line-height: 1.55;
+  color: #56685c;
+  margin: 0 0 10px;
+}
+.stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 13px 0;
+  font-size: 12px;
+  font-weight: 700;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 9px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  height: 92px;
+  border: 1px solid #d8e1d4;
+  background: #dfebe1;
+  border-radius: 12px;
+  color: #46695c;
+  font-size: 33px;
+  cursor: pointer;
+  transition:
+    transform 0.12s,
+    background 0.15s;
+}
+.card-word {
+  font-size: 11px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.card:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+.card:focus-visible {
+  outline: 3px solid #865b48;
+  outline-offset: 2px;
+}
+.card.revelada {
+  background: #fff;
+  color: #244b43;
+  border-color: #c6d5cb;
+}
+.card.acertou {
+  background: #cbe0d1;
+  border-color: #91b09c;
+}
+.card:disabled {
+  cursor: default;
+}
+button.restart {
+  min-height: 44px;
+  border: 0;
+  border-radius: 40px;
+  background: #244b43;
+  color: white;
+  padding: 10px 17px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.message {
+  text-align: center;
+  padding: 14px 0;
+  font-size: 12px;
+  min-height: 42px;
+}
+small {
+  color: #56685c;
+  font-size: 10px;
+  display: block;
+  text-align: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+}
+@media (max-width: 440px) {
+  main {
+    padding: 12px;
+  }
+  .card {
+    height: 72px;
+    font-size: 26px;
+  }
+  .grid {
+    gap: 6px;
+  }
+  h1 {
+    font-size: 22px;
+  }
+}

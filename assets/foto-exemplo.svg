@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 860">
+  <rect width="700" height="860" fill="#e7bca6" />
+  <circle cx="350" cy="300" r="130" fill="#faf7f1" />
+  <path d="M110 860V720a240 240 0 0 1 480 0v140Z" fill="#244b43" />
+  <text
+    x="350"
+    y="810"
+    text-anchor="middle"
+    fill="#faf7f1"
+    font-family="Georgia,serif"
+    font-size="28"
+  >
+    Fotografia indisponível
+  </text>
+</svg>
