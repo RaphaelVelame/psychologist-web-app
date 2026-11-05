@@ -32,9 +32,6 @@ body {
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
 }
-body.modal-open {
-  overflow: hidden;
-}
 button,
 input {
   font: inherit;
@@ -79,7 +76,6 @@ p {
 .hero-copy,
 .section-copy,
 .service-card,
-.game-card-content,
 .faq-list,
 .contact-content {
   min-width: 0;
@@ -595,221 +591,9 @@ p {
   color: #596a62;
   margin: 23px 0 0;
 }
-/* PHILOSOPHY */
-.philosophy-section {
-  background: var(--green);
-  color: #fff;
-  overflow: hidden;
-}
-.philosophy-layout {
-  min-height: 435px;
-  display: grid;
-  grid-template-columns: 0.42fr 0.58fr;
-  gap: 70px;
-  align-items: center;
-  position: relative;
-}
-.philosophy-bloom {
-  font-family: var(--font-serif);
-  font-size: 360px;
-  line-height: 1;
-  color: #acc3ac;
-  opacity: 0.34;
-  transform: translate(-20px, 9px);
-  user-select: none;
-}
-.philosophy-copy {
-  padding: 75px 0;
-}
 .light-kicker {
   color: #d8b6a6;
   margin-bottom: 25px;
-}
-.philosophy-copy h2 {
-  font: normal clamp(34px, 3.4vw, 48px) / 1.25 var(--font-serif);
-  letter-spacing: -0.025em;
-  margin-bottom: 20px;
-}
-.philosophy-copy p:not(.light-kicker) {
-  font-size: 14px;
-  line-height: 1.95;
-  max-width: 545px;
-  color: #c3d4ca;
-}
-/* RESOURCES */
-.resources-section {
-  background: #fdfaf5;
-}
-.resource-intro {
-  max-width: 860px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  background: #eff3eb;
-  border-radius: 12px;
-  padding: 16px 21px;
-  margin: 0 0 29px;
-}
-.resource-intro-icon {
-  font-size: 23px;
-  color: #708e79;
-}
-.resource-intro p {
-  margin: 0;
-  font-size: 12px;
-  color: #617568;
-  line-height: 1.7;
-}
-.filter-bar {
-  display: flex;
-  gap: 9px;
-  flex-wrap: wrap;
-  margin-bottom: 28px;
-}
-.filter-chip {
-  border: 1px solid #d7e1d5;
-  background: transparent;
-  border-radius: 99px;
-  color: #667e70;
-  padding: 11px 20px;
-  font-size: 12px;
-  font-weight: 700;
-}
-.filter-chip.active,
-.filter-chip:hover {
-  background: var(--green);
-  color: #fff;
-  border-color: var(--green);
-}
-.game-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
-}
-.game-card {
-  border: 1px solid #e7e7df;
-  background: #fff;
-  border-radius: 15px;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 190px 1fr;
-  min-height: 258px;
-  transition:
-    box-shadow 0.2s,
-    transform 0.2s;
-}
-.game-card:hover {
-  box-shadow: 0 15px 40px rgba(36, 75, 67, 0.09);
-  transform: translateY(-3px);
-}
-.game-illustration {
-  display: grid;
-  place-items: center;
-  position: relative;
-  overflow: hidden;
-  background: #f1d9c9;
-}
-.game-card[data-tema='verde'] .game-illustration {
-  background: #d9e5da;
-}
-.game-illustration:before,
-.game-illustration:after {
-  content: '';
-  position: absolute;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  transform: translate(38px, -40px);
-}
-.game-illustration:after {
-  width: 145px;
-  height: 145px;
-  transform: translate(-57px, 70px);
-}
-.game-glyph {
-  font: normal 110px var(--font-serif);
-  color: #8e6c5e;
-  position: relative;
-  z-index: 1;
-}
-.game-card[data-tema='verde'] .game-glyph {
-  color: #537765;
-}
-.game-card-content {
-  padding: 25px 25px 22px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.game-label {
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.13em;
-  color: #8b604d;
-  margin-bottom: 12px;
-}
-.game-card h3 {
-  font: normal 26px/1.16 var(--font-serif);
-  letter-spacing: -0.02em;
-  color: var(--green);
-  margin-bottom: 10px;
-}
-.game-card p {
-  font-size: 12px;
-  line-height: 1.7;
-  color: #596a62;
-  flex: 1;
-}
-.game-action {
-  background: none;
-  border: 0;
-  padding: 9px 0;
-  color: var(--green);
-  font-size: 12px;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  gap: 13px;
-}
-.game-action:hover {
-  color: #8b604d;
-}
-.game-action span {
-  font-size: 18px;
-}
-.more-resources {
-  margin-top: 22px;
-  border: 1px dashed #c6d0c5;
-  padding: 23px 29px;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  border-radius: 12px;
-}
-.more-icon {
-  width: 47px;
-  height: 47px;
-  border-radius: 50%;
-  border: 1px solid #b6c9bc;
-  display: grid;
-  place-items: center;
-  font-size: 25px;
-  color: #769783;
-}
-.more-resources strong {
-  font: normal 18px var(--font-serif);
-  color: var(--green);
-}
-.more-resources p {
-  font-size: 12px;
-  color: #596a62;
-  margin: 7px 0 0;
-}
-.more-trail {
-  margin-left: auto;
-  font-size: 37px;
-  color: #cfaa94;
 }
 /* FAQ */
 .faq-section {
@@ -1041,125 +825,6 @@ p {
   color: #566e61;
   font-size: 10px;
 }
-/* DIALOG */
-.game-dialog {
-  position: fixed;
-  inset: 0;
-  margin: auto;
-  max-width: min(740px, calc(100vw - 28px));
-  width: 100%;
-  max-height: min(90dvh, 820px);
-  padding: 0;
-  border: 0;
-  border-radius: 19px;
-  background: #fffdf9;
-  color: var(--green);
-  box-shadow: 0 25px 100px #10282065;
-  overflow: auto;
-}
-.game-dialog::backdrop {
-  background: rgba(14, 37, 32, 0.7);
-  backdrop-filter: blur(4px);
-}
-.dialog-shell {
-  padding: 28px 32px 22px;
-}
-.dialog-head {
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
-  gap: 15px;
-  border-bottom: 1px solid #e6ece3;
-  padding-bottom: 17px;
-}
-.dialog-eyebrow {
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  color: #8b604d;
-  font-weight: 700;
-  margin-bottom: 7px;
-}
-.dialog-head h2 {
-  font: normal 31px var(--font-serif);
-  margin: 0;
-}
-.dialog-close {
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
-  border: 1px solid #d6e1d6;
-  background: #f4f7f0;
-  color: var(--green);
-  border-radius: 50%;
-  font-size: 27px;
-  line-height: 1;
-}
-.dialog-content {
-  padding: 28px 0 10px;
-  min-height: 260px;
-}
-.dialog-note {
-  padding-top: 17px;
-  border-top: 1px solid #e5e9e2;
-  color: #596a62;
-  font-size: 11px;
-  margin: 10px 0 0;
-  line-height: 1.6;
-}
-.card-game {
-  background: #edf1e9;
-  border-radius: 16px;
-  padding: 32px;
-  text-align: center;
-}
-.card-game-category {
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  color: #596a62;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-.card-game-question {
-  font: normal 32px/1.36 var(--font-serif);
-  min-height: 130px;
-  display: grid;
-  place-items: center;
-  max-width: 490px;
-  margin: 12px auto 22px;
-  color: var(--green);
-}
-.card-game-counter {
-  font-size: 11px;
-  color: #596a62;
-  margin-bottom: 18px;
-}
-.card-game-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.card-game-buttons button {
-  background: var(--green);
-  color: #fff;
-  border: 0;
-  border-radius: 30px;
-  padding: 13px 19px;
-  font-size: 12px;
-  font-weight: 700;
-}
-.card-game-buttons button.secondary {
-  background: transparent;
-  color: var(--green);
-  border: 1px solid #b9cabc;
-}
-.game-iframe {
-  width: 100%;
-  height: 440px;
-  border: 1px solid #e4e8e1;
-  border-radius: 13px;
-  background: #f9f6f0;
-}
 .toast {
   position: fixed;
   bottom: 25px;
@@ -1186,9 +851,6 @@ p {
   }
   .about-grid {
     gap: 65px;
-  }
-  .game-card {
-    grid-template-columns: 145px 1fr;
   }
   .contact-panel {
     padding: 65px 50px;
@@ -1266,12 +928,6 @@ p {
   }
   .service-card h3 {
     font-size: 24px;
-  }
-  .game-grid {
-    grid-template-columns: 1fr;
-  }
-  .game-card {
-    grid-template-columns: 220px 1fr;
   }
   .faq-grid {
     gap: 45px;
@@ -1411,52 +1067,6 @@ p {
   .service-card p {
     margin-bottom: 20px;
   }
-  .philosophy-layout {
-    grid-template-columns: 1fr;
-    gap: 0;
-    min-height: 0;
-  }
-  .philosophy-bloom {
-    display: none;
-  }
-  .philosophy-copy {
-    padding: 75px 0;
-  }
-  .philosophy-copy h2 {
-    font-size: 39px;
-  }
-  .resource-intro {
-    align-items: start;
-  }
-  .filter-chip {
-    padding: 10px 15px;
-  }
-  .game-grid {
-    grid-template-columns: 1fr;
-  }
-  .game-card {
-    grid-template-columns: 120px 1fr;
-    min-height: 215px;
-  }
-  .game-glyph {
-    font-size: 75px;
-  }
-  .game-card-content {
-    padding: 22px 17px;
-  }
-  .game-card h3 {
-    font-size: 24px;
-  }
-  .game-card p {
-    font-size: 11px;
-  }
-  .more-resources {
-    padding: 17px;
-    align-items: flex-start;
-  }
-  .more-trail {
-    display: none;
-  }
   .faq-grid {
     grid-template-columns: 1fr;
     gap: 35px;
@@ -1494,22 +1104,6 @@ p {
     flex-direction: column;
     gap: 8px;
   }
-  .dialog-shell {
-    padding: 23px 18px;
-  }
-  .dialog-head h2 {
-    font-size: 27px;
-  }
-  .card-game {
-    padding: 24px 16px;
-  }
-  .card-game-question {
-    font-size: 26px;
-    min-height: 165px;
-  }
-  .game-iframe {
-    height: 440px;
-  }
   .toast {
     right: 15px;
     bottom: 15px;
@@ -1543,12 +1137,6 @@ p {
   }
 }
 @media (max-width: 380px) {
-  .game-card {
-    grid-template-columns: 85px minmax(0, 1fr);
-  }
-  .game-glyph {
-    font-size: 60px;
-  }
   .brand {
     gap: 8px;
   }

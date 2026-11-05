@@ -15,12 +15,9 @@ window.SITE_CONFIG = {
     'Cada trajetória é única. Aqui você poderá conhecer meu trabalho, minha forma de escuta e os caminhos para entrar em contato.',
   heroNote: 'Um convite ao encontro, com cuidado e respeito.',
   aboutLead:
-    'Este é o espaço para apresentar minha trajetória, minha formação e o que orienta minha prática como psicóloga.',
+    'Sou psicóloga formada pela Universidade Federal do Recôncavo da Bahia (UFRB), com atuação clínica orientada pela psicanálise lacaniana.',
   aboutBody:
-    'Substitua este texto por uma apresentação em primeira pessoa: conte sobre sua experiência, o público que atende e sua perspectiva de trabalho, com uma linguagem próxima e profissional.',
-  philosophyTitle: 'Há histórias que precisam, primeiro, de espaço para serem contadas.',
-  philosophyBody:
-    'Este trecho pode apresentar a abordagem teórica e a maneira como Gabriela compreende o processo terapêutico, sem prometer resultados.',
+    'Atendo crianças, adolescentes e mulheres adultas, oferecendo uma escuta ética, humanizada e acolhedora. Minha prática é pautada no respeito à singularidade de cada sujeito, considerando sua história, seus desejos e suas diferentes formas de vivenciar o mundo.',
   contactDescription:
     'Para dúvidas sobre atendimento, horários e disponibilidade, entre em contato pelos canais indicados abaixo.',
   servicos: [
@@ -29,46 +26,39 @@ window.SITE_CONFIG = {
       simbolo: '◌',
       titulo: 'Atendimento individual',
       descricao:
-        'Descreva aqui como funciona o atendimento individual e para quais públicos ele é oferecido.',
-      detalhe: 'Texto demonstrativo · editar',
+        'Ofereço um atendimento humanizado, fundamentado na psicanálise de orientação lacaniana, com uma escuta acolhedora, ética e sensível à singularidade de cada pessoa.',
     },
     {
       numero: '02',
       simbolo: '✳',
-      titulo: 'Adolescentes e famílias',
+      titulo: 'Crianças, adolescentes e mulheres adultas',
       descricao:
-        'Apresente, se fizer parte da atuação profissional, o acompanhamento de adolescentes e a orientação a responsáveis.',
-      detalhe: 'Texto demonstrativo · editar',
+        'Os atendimentos são voltados para crianças, adolescentes e mulheres adultas, respeitando suas histórias, experiências e diferentes formas de expressão. O processo terapêutico proporciona um espaço seguro e sigiloso para a elaboração de conflitos, sentimentos e questões que atravessam a vida de cada sujeito.',
     },
     {
       numero: '03',
       simbolo: '↗',
       titulo: 'Modalidades e horários',
       descricao:
-        'Esclareça se há atendimento presencial ou on-line, a região de atuação e como verificar a disponibilidade.',
-      detalhe: 'Texto demonstrativo · editar',
+        'On-line e presencial em Santo Antônio de Jesus, Bahia. Horarios flexíveis, de acordo com a disponibilidade do paciente e da profissional.As sessões têm duração aproximada de 50 minutos, nas modalidades presencial e online.',
     },
   ],
   perguntas: [
     {
       pergunta: 'Como faço para agendar um primeiro contato?',
       resposta:
-        'Utilize os canais de contato informados nesta página. Personalize esta resposta para explicar os procedimentos reais de agendamento.',
+        'Através do WhatsApp ou e-mail, você pode enviar uma mensagem para agendar um primeiro contato. A partir desse contato inicial, será possível alinhar expectativas, esclarecer dúvidas e definir os próximos passos do processo terapêutico.',
     },
     {
       pergunta: 'Os atendimentos são presenciais ou on-line?',
       resposta:
-        'Atualize este texto com as modalidades efetivamente oferecidas por Gabriela e as condições aplicáveis.',
+        'Os atendimentos são realizados nas modalidades on-line e presencial (em Santo Antônio de Jesus - BA). As sessões ocorrem às terças e quartas-feiras.',
     },
+
     {
-      pergunta: 'Como funcionam os encontros?',
+      pergunta: 'Qual a frequência dos atendimentos?',
       resposta:
-        'Explique aqui, com suas próprias palavras, a duração, a frequência e os combinados iniciais, caso deseje divulgá-los.',
-    },
-    {
-      pergunta: 'Os jogos substituem o atendimento psicológico?',
-      resposta:
-        'Não. Os jogos deste site são exemplos de recursos lúdicos para conversa e exploração. Não são instrumentos diagnósticos e não substituem avaliação ou acompanhamento profissional.',
+        'Os atendimentos podem ocorrer semanalmente ou quinzenalmente, dependendo das necessidades do paciente e da disponibilidade da profissional. A frequência será discutida durante o primeiro contato e ajustada conforme o andamento do processo terapêutico.',
     },
   ],
 };

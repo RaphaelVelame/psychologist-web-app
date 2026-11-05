@@ -31,7 +31,7 @@ const server = createServer(async (request, response) => {
       safePath.startsWith('..') ||
       path.isAbsolute(safePath) ||
       safePath.split(path.sep).some((part) => part.startsWith('.')) ||
-      !(relative === 'index.html' || /^(assets|js|jogos)\//.test(relative))
+      !(relative === 'index.html' || /^(assets|js)\//.test(relative))
     ) {
       response.writeHead(404).end('Não encontrado');
       return;

@@ -1,7 +1,6 @@
 (function () {
   'use strict';
   const config = window.SITE_CONFIG || {};
-  const jogos = window.SITE_GAMES || [];
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
   document.documentElement.classList.add('js');
@@ -12,8 +11,6 @@
     'heroNote',
     'aboutLead',
     'aboutBody',
-    'philosophyTitle',
-    'philosophyBody',
     'contactDescription',
   ];
   campos.forEach((campo) => {
@@ -150,171 +147,6 @@
     $('#contact-status').textContent =
       'Ao entrar em contato, evite enviar informações clínicas sensíveis na primeira mensagem.';
 
-  const filtroEstado = { atual: 'todos' };
-  function montarJogos() {
-    const area = $('#game-grid');
-    area.replaceChildren();
-    const visiveis = jogos.filter(
-      (j) => filtroEstado.atual === 'todos' || j.filtro === filtroEstado.atual
-    );
-    visiveis.forEach((jogo) => {
-      const card = el('article', 'game-card');
-      card.dataset.tema = jogo.tema || 'pessego';
-      const visual = el('div', 'game-illustration');
-      visual.setAttribute('aria-hidden', 'true');
-      visual.append(el('span', 'game-glyph', jogo.acento || '✳'));
-      const content = el('div', 'game-card-content');
-      content.append(
-        el('span', 'game-label', jogo.etiqueta),
-        el('h3', '', jogo.titulo),
-        el('p', '', jogo.descricao)
-      );
-      const button = el('button', 'game-action');
-      button.type = 'button';
-      button.setAttribute('aria-label', `Abrir ${jogo.titulo}`);
-      button.textContent = 'Abrir atividade ';
-      button.append(el('span', '', '↗'));
-      button.addEventListener('click', () => abrirJogo(jogo));
-      content.append(button);
-      card.append(visual, content);
-      area.append(card);
-    });
-    if (!visiveis.length) area.append(el('p', '', 'Ainda não há jogos nessa categoria.'));
-  }
-  $$('.filter-chip').forEach((button) =>
-    button.addEventListener('click', () => {
-      filtroEstado.atual = button.dataset.filter;
-      $$('.filter-chip').forEach((b) => {
-        const ativo = b === button;
-        b.classList.toggle('active', ativo);
-        b.setAttribute('aria-pressed', String(ativo));
-      });
-      montarJogos();
-    })
-  );
-
-  const dialog = $('#game-dialog');
-  const areaJogo = $('#dialog-content');
-  let ultimoFoco = null;
-  $('#close-dialog').addEventListener('click', () => dialog.close());
-  let pressionouFora = false;
-  function foraDoDialog(event) {
-    const bounds = dialog.getBoundingClientRect();
-    return (
-      event.clientX < bounds.left ||
-      event.clientX > bounds.right ||
-      event.clientY < bounds.top ||
-      event.clientY > bounds.bottom
-    );
-  }
-  dialog.addEventListener('pointerdown', (event) => {
-    pressionouFora = event.target === dialog && foraDoDialog(event);
-  });
-  dialog.addEventListener('click', (event) => {
-    if (pressionouFora && event.target === dialog && foraDoDialog(event)) dialog.close();
-    pressionouFora = false;
-  });
-  window.addEventListener('message', (event) => {
-    const iframeAtivo = $('.game-iframe', areaJogo);
-    if (
-      iframeAtivo &&
-      event.source === iframeAtivo.contentWindow &&
-      event.data &&
-      event.data.tipo === 'fechar-jogo-gabriela' &&
-      dialog.open
-    )
-      dialog.close();
-  });
-  dialog.addEventListener('close', () => {
-    areaJogo.replaceChildren();
-    document.body.classList.remove('modal-open');
-    if (ultimoFoco && ultimoFoco.isConnected) ultimoFoco.focus();
-  });
-  function abrirJogo(jogo) {
-    ultimoFoco = document.activeElement;
-    $('#dialog-title').textContent = jogo.titulo;
-    areaJogo.replaceChildren();
-    if (jogo.tipo === 'cartas') montarCartas(areaJogo);
-    else if (jogo.tipo === 'iframe') montarIframe(areaJogo, jogo);
-    else areaJogo.append(el('p', '', 'Tipo de atividade não reconhecido.'));
-    dialog.showModal();
-    document.body.classList.add('modal-open');
-  }
-  function montarCartas(container) {
-    const cartas = [...(window.CARTAS_CONVERSA || [])];
-    const box = el('div', 'card-game');
-    const categoria = el('p', 'card-game-category');
-    const pergunta = el('p', 'card-game-question');
-    pergunta.setAttribute('aria-live', 'polite');
-    pergunta.setAttribute('aria-atomic', 'true');
-    const contador = el('p', 'card-game-counter');
-    const actions = el('div', 'card-game-buttons');
-    const proxima = el('button', '', 'Próxima carta →');
-    const reiniciar = el('button', 'secondary', 'Embaralhar');
-    proxima.type = 'button';
-    reiniciar.type = 'button';
-    actions.append(proxima, reiniciar);
-    box.append(categoria, pergunta, contador, actions);
-    container.append(box);
-    let deck = [],
-      indice = 0;
-    function embaralhar() {
-      deck = [...cartas];
-      for (let i = deck.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [deck[i], deck[j]] = [deck[j], deck[i]];
-      }
-      indice = 0;
-      mostrarCarta();
-    }
-    function mostrarCarta() {
-      if (!deck.length) {
-        pergunta.textContent = 'Não há cartas disponíveis no momento.';
-        proxima.disabled = true;
-        reiniciar.disabled = true;
-        return;
-      }
-      const atual = deck[indice];
-      categoria.textContent = atual.categoria;
-      pergunta.textContent = atual.pergunta;
-      contador.textContent = `Carta ${indice + 1} de ${deck.length}`;
-      proxima.textContent = indice === deck.length - 1 ? 'Recomeçar ↻' : 'Próxima carta →';
-    }
-    proxima.addEventListener('click', () => {
-      if (indice === deck.length - 1) embaralhar();
-      else {
-        indice++;
-        mostrarCarta();
-      }
-    });
-    reiniciar.addEventListener('click', embaralhar);
-    embaralhar();
-  }
-
-  function montarIframe(container, jogo) {
-    const src = String(jogo.src || '').trim();
-    let externo = false;
-    try {
-      const url = new URL(src);
-      externo = url.protocol === 'https:' && !url.username && !url.password;
-    } catch {
-      // Caminhos relativos são validados separadamente abaixo.
-    }
-    const local = /^(?!\/)(?!.*(?:^|\/)\.\.(?:\/|$))[a-zA-Z0-9_./-]+\.html$/.test(src);
-    if (!externo && !local) {
-      container.append(el('p', '', 'Endereço inválido. Use um arquivo HTML local ou HTTPS.'));
-      return;
-    }
-    const iframe = el('iframe', 'game-iframe');
-    iframe.title = jogo.titulo;
-    iframe.src = src;
-    iframe.referrerPolicy = 'no-referrer';
-    // Os jogos executam scripts, mas não acessam o documento nem os dados do site.
-    iframe.setAttribute('sandbox', 'allow-scripts');
-    container.append(iframe);
-  }
-
   montarServicos();
   montarPerguntas();
-  montarJogos();
 })();

@@ -71,52 +71,19 @@ for (const filename of files) {
 }
 
 const context = vm.createContext({ window: {} });
-for (const filename of ['js/config.js', 'js/games.js']) {
-  new vm.Script(await readFile(path.join(root, filename), 'utf8')).runInContext(context, {
-    timeout: 1000,
-  });
-}
+new vm.Script(await readFile(path.join(root, 'js/config.js'), 'utf8')).runInContext(context, {
+  timeout: 1000,
+});
 const config = context.window.SITE_CONFIG;
-const games = context.window.SITE_GAMES;
-if (!config || !Array.isArray(games))
-  throw new Error('Configuração ou catálogo de jogos inválido.');
+if (!config || typeof config !== 'object') throw new Error('Configuração inválida.');
 if (typeof config.foto === 'string' && config.foto) {
   await checkLocalFile(path.resolve(root, config.foto), 'config.foto');
-}
-const gameIds = new Set();
-for (const game of games) {
-  if (!game.id || gameIds.has(game.id)) errors.push('Catálogo: cada jogo precisa de um ID único.');
-  gameIds.add(game.id);
-  if (!['cartas', 'iframe'].includes(game.tipo))
-    errors.push(`Catálogo: tipo inválido em ${game.id}.`);
-  if (game.tipo === 'iframe') {
-    const source = String(game.src || '');
-    if (/^https:\/\//i.test(source)) {
-      try {
-        const url = new URL(source);
-        if (url.username || url.password)
-          errors.push(`Catálogo: URL com credenciais em ${game.id}.`);
-      } catch {
-        errors.push(`Catálogo: URL inválida em ${game.id}.`);
-      }
-    } else if (/^(?!\/)(?!.*(?:^|\/)\.\.(?:\/|$))[a-zA-Z0-9_./-]+\.html$/.test(source)) {
-      await checkLocalFile(path.resolve(root, source), `Jogo ${game.id}`);
-    } else errors.push(`Catálogo: endereço inválido em ${game.id}.`);
-  }
 }
 
 if (publication) {
   if (config.modoDemonstracao !== false)
     pending.push('Desativar modoDemonstracao depois de revisar o conteúdo.');
-  for (const field of [
-    'nome',
-    'crp',
-    'foto',
-    'fotoAlt',
-    'aboutLead',
-    'aboutBody',
-    'philosophyBody',
-  ]) {
+  for (const field of ['nome', 'crp', 'foto', 'fotoAlt', 'aboutLead', 'aboutBody']) {
     if (typeof config[field] !== 'string' || !config[field].trim())
       pending.push(`Preencher ${field}.`);
   }
@@ -150,7 +117,7 @@ if (errors.length || pending.length) {
   console.log(
     publication
       ? 'Verificação de publicação concluída.'
-      : 'Sintaxe, arquivos, âncoras e catálogo verificados.'
+      : 'Sintaxe, arquivos e âncoras verificados.'
   );
 }
 if (publication)
